@@ -16,8 +16,7 @@
     --spacing-sm: 40px;
     --spacing-md: 60px;
     --spacing-lg: 80px;
-    --card-radius: 24px;
-    --image-radius: 16px;
+    --photo-size: 180px;
 }
 
 body {
@@ -38,7 +37,6 @@ h1 {
     font-weight: 700;
     color: var(--background-color);
     margin-bottom: var(--spacing-sm);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -46,25 +44,13 @@ h2 {
     font-weight: 600;
     text-align: center;
     margin-bottom: var(--spacing-xs);
-    position: relative;
-    padding-bottom: var(--spacing-xs);
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--text-color), transparent);
 }
 
 h3 {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: var(--spacing-xs);
+    text-align: center;
 }
 
 /* Layout */
@@ -96,7 +82,7 @@ h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .hero-content {
@@ -109,7 +95,6 @@ h3 {
 .hero p {
     font-size: 1.5rem;
     margin-bottom: var(--spacing-sm);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero-separator {
@@ -130,13 +115,12 @@ section {
     color: var(--text-light);
     font-size: 1.125rem;
     margin-bottom: var(--spacing-md);
-    font-style: italic;
 }
 
 /* Cards */
 .card {
     background-color: var(--background-color);
-    border-radius: var(--card-radius);
+    border-radius: 16px;
     padding: var(--spacing-md);
     box-shadow: 0 4px 20px var(--shadow-color);
     border: 1px solid var(--border-color);
@@ -144,7 +128,7 @@ section {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    align-items: center;
 }
 
 .card:hover {
@@ -152,35 +136,32 @@ section {
     box-shadow: 0 8px 30px var(--shadow-color);
 }
 
-.card-image {
-    width: 100%;
-    height: 300px;
-    border-radius: var(--image-radius);
+/* Member Photo */
+.member-photo {
+    width: var(--photo-size);
+    height: var(--photo-size);
+    border-radius: 50%;
     overflow: hidden;
     margin-bottom: var(--spacing-sm);
+    border: 4px solid var(--background-color);
+    box-shadow: 0 4px 20px var(--shadow-color);
     position: relative;
 }
 
-.card-image img {
+.member-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.card:hover .card-image img {
+.card:hover .member-photo img {
     transform: scale(1.05);
-}
-
-.card-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
 }
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     margin-top: var(--spacing-md);
 }
@@ -191,7 +172,7 @@ section {
     font-size: 1.125rem;
     font-weight: 500;
     margin-bottom: var(--spacing-sm);
-    font-style: italic;
+    text-align: center;
 }
 
 .bio {
@@ -199,12 +180,13 @@ section {
     line-height: 1.8;
     text-align: justify;
     flex-grow: 1;
+    width: 100%;
 }
 
 /* Separators */
 .footer-separator {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    background-color: var(--border-color);
     opacity: 0.5;
 }
 
@@ -212,6 +194,10 @@ section {
 @media (max-width: 1024px) {
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    :root {
+        --photo-size: 160px;
     }
 }
 
@@ -239,9 +225,9 @@ section {
     .card {
         padding: var(--spacing-sm);
     }
-
-    .card-image {
-        height: 250px;
+    
+    :root {
+        --photo-size: 140px;
     }
 }
 
@@ -281,8 +267,8 @@ section {
     .cards-grid {
         grid-template-columns: 1fr;
     }
-
-    .card-image {
-        height: 200px;
+    
+    :root {
+        --photo-size: 120px;
     }
 } 
