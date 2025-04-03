@@ -6,7 +6,8 @@
 }
 
 :root {
-    --primary-color: #000000;
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
     --text-color: #333333;
     --text-light: #666666;
     --background-color: #ffffff;
@@ -17,6 +18,7 @@
     --spacing-md: 60px;
     --spacing-lg: 80px;
     --photo-size: 180px;
+    --section-bg: #f9f9f9;
 }
 
 body {
@@ -37,6 +39,7 @@ h1 {
     font-weight: 700;
     color: var(--background-color);
     margin-bottom: var(--spacing-sm);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -44,6 +47,7 @@ h2 {
     font-weight: 600;
     text-align: center;
     margin-bottom: var(--spacing-xs);
+    color: var(--primary-color);
 }
 
 h3 {
@@ -51,6 +55,7 @@ h3 {
     font-weight: 600;
     margin-bottom: var(--spacing-xs);
     text-align: center;
+    color: var(--primary-color);
 }
 
 /* Layout */
@@ -62,7 +67,7 @@ h3 {
 
 /* Hero Section */
 .hero {
-    height: 70vh;
+    height: 80vh;
     background-image: url('https://arthistorio.com/wp-content/uploads/2024/12/provincial-archives-of-alberta-DayQIDnhEYQ-unsplash.jpg');
     background-size: cover;
     background-position: center;
@@ -73,6 +78,7 @@ h3 {
     justify-content: center;
     text-align: center;
     color: var(--background-color);
+    overflow: hidden;
 }
 
 .hero::before {
@@ -82,7 +88,7 @@ h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
 }
 
 .hero-content {
@@ -92,9 +98,15 @@ h3 {
     padding: 0 var(--spacing-sm);
 }
 
+.hero-text {
+    animation: fadeInUp 1s ease-out;
+}
+
 .hero p {
     font-size: 1.5rem;
     margin-bottom: var(--spacing-sm);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
 }
 
 .hero-separator {
@@ -103,6 +115,9 @@ h3 {
     background-color: var(--background-color);
     margin: 0 auto;
     opacity: 0.3;
+    transform: scaleX(0);
+    animation: scaleIn 1s ease-out forwards;
+    animation-delay: 0.5s;
 }
 
 /* Sections */
@@ -110,11 +125,93 @@ section {
     padding: var(--spacing-lg) 0;
 }
 
-.section-subtitle {
+.section-header {
     text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-subtitle {
     color: var(--text-light);
     font-size: 1.125rem;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.section-decoration {
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: var(--spacing-sm) auto;
+    position: relative;
+}
+
+.section-decoration::before,
+.section-decoration::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.section-decoration::before {
+    left: -20px;
+}
+
+.section-decoration::after {
+    right: -20px;
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.text-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+/* Features */
+.features {
+    background-color: var(--section-bg);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.feature-card {
+    background-color: var(--background-color);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
 }
 
 /* Cards */
@@ -129,6 +226,23 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-decoration {
+    transform: scaleX(1);
 }
 
 .card:hover {
@@ -173,6 +287,7 @@ section {
     font-weight: 500;
     margin-bottom: var(--spacing-sm);
     text-align: center;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .bio {
@@ -183,17 +298,55 @@ section {
     width: 100%;
 }
 
-/* Separators */
+/* Footer */
+footer {
+    background-color: var(--section-bg);
+    padding: var(--spacing-lg) 0;
+}
+
 .footer-separator {
     height: 1px;
     background-color: var(--border-color);
     opacity: 0.5;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-text {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .cards-grid {
+    .cards-grid,
+    .features-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
     }
     
     :root {
@@ -264,7 +417,8 @@ section {
         font-size: 0.875rem;
     }
 
-    .cards-grid {
+    .cards-grid,
+    .features-grid {
         grid-template-columns: 1fr;
     }
     
